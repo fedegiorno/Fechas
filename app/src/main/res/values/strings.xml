@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Fechas</string>
+
+    <string name="BTN_fecha">Buscar Fecha</string>
+    <string name="BTN_lapso">Buscar Lapso</string>
+
+    <string name="TXT_hint_fecha">Ingrese fecha origen dd/MM/aaaa</string>
+    <string name="TXT_hint_lapso">Ingrese lapso</string>
+
+
+</resources>
