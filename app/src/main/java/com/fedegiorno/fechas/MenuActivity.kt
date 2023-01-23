@@ -3,7 +3,6 @@ package com.fedegiorno.fechas
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import com.fedegiorno.fechas.databinding.ActivityMenuBinding
 
 class MenuActivity : AppCompatActivity() {
@@ -18,12 +17,10 @@ class MenuActivity : AppCompatActivity() {
 
 
         menubinding.BTNEntrefechas.setOnClickListener {
-            Log.d("KIRCHOFFF","OPRIMISTE FECHA")
             val intent = Intent(this,EntreFechaActivity::class.java)
             startActivity(intent)
         }
         menubinding.BTNLapso.setOnClickListener {
-            Log.d("KIRCHOFFF","OPRIMISTE LAPSO")
             //val intent = Intent(this,LapsoActivity::class.java)
             startActivity(intent)
         }
