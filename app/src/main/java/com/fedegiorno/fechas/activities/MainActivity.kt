@@ -1,4 +1,4 @@
-package com.fedegiorno.fechas
+package com.fedegiorno.fechas.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -11,7 +11,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         screenSplash.setKeepOnScreenCondition{true}
-        val intent = Intent(this,MenuActivity::class.java)
+        val intent = Intent(this, MenuActivity::class.java)
         startActivity(intent)
         finish()
     }

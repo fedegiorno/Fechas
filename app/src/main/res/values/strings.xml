@@ -1,11 +1,30 @@
 <resources>
     <string name="app_name">Fechas</string>
 
-    <string name="BTN_fecha">Buscar Fecha</string>
-    <string name="BTN_lapso">Buscar Lapso</string>
+    <string name="rotuloFechaInicial">FechaInicial</string>
+    <string name="rotuloFechaFinal">FechaFinal</string>
+    <string name="BTNlapso">Lapso entre fechas</string>
+    <string name="BTNfecha">Fecha desde</string>
+    <string name="BTNfechaIni">OK Fecha Inicial</string>
+
+    <string name="TXTfechaHint">dd/MM/aaaa</string>
+
+    <string name="ingresefechaorigen">Ingrese fecha origen dd/MM/aaaa</string>
+    <string name="ingreselapsoendias">Ingrese lapso en dias</string>
+    <string name="calcularfecha">Calcular Fecha</string>
+
+    <string name="BTN_fecha">Buscar cantidad de tiempo</string>
+    <string name="BTN_lapso">Buscar nueva fecha</string>
 
     <string name="TXT_hint_fecha">Ingrese fecha origen dd/MM/aaaa</string>
     <string name="TXT_hint_lapso">Ingrese lapso</string>
+
+    <string name="RBX_Anios">Años</string>
+    <string name="RBX_Meses">Meses</string>
+    <string name="RBX_Semanas">Semanas</string>
+    <string name="RBX_Dias">Dias</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

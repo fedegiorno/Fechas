@@ -1,53 +1,167 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EntreFechaActivity">
+    tools:context=".activities.EntreFechaActivity">
 
     <CalendarView
-        android:id="@+id/calendariolapso"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:id="@+id/calendarioFechaInicio"
+        android:layout_width="350dp"
+        android:layout_height="270dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/TXTfechaOrigen"
-        android:layout_width="350dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="32dp"
-        android:ems="10"
-        android:hint="@string/TXT_hint_fecha"
-        android:inputType="date"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/calendariolapso"
-        android:importantForAutofill="no" />
-
-    <EditText
-        android:id="@+id/TXTlapso"
-        android:layout_width="350dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="32dp"
-        android:ems="10"
-        android:hint="@string/TXT_hint_lapso"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TXTfechaOrigen"
-        android:importantForAutofill="no" />
-
     <Button
-        android:id="@+id/BTNCalcularlapso"
+        android:id="@+id/BTNfechas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
+        android:layout_marginTop="16dp"
+        android:enabled="false"
+        android:text="@string/BTNfechaIni"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TXTfechafinal" />
+
+    <TextView
+        android:id="@+id/ROT_fechainicial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/rotuloFechaInicial"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calendarioFechaInicio" />
+
+    <TextView
+
+        android:id="@+id/ROT_fechafinal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="36dp"
+        android:text="@string/rotuloFechaFinal"
+        app:layout_constraintBottom_toTopOf="@+id/BTNfechas"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ROT_fechainicial"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/TXTfechainicial"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="@string/TXTfechaHint"
+        android:importantForAutofill="no"
+        android:inputType="date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.662"
+        app:layout_constraintStart_toEndOf="@+id/ROT_fechainicial"
+        app:layout_constraintTop_toBottomOf="@+id/calendarioFechaInicio"
+        tools:ignore="DuplicateSpeakableTextCheck" />
+
+    <EditText
+        android:id="@+id/TXTfechafinal"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="@string/TXTfechaHint"
+        android:importantForAutofill="no"
+        android:inputType="date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.444"
+        app:layout_constraintStart_toEndOf="@+id/ROT_fechafinal"
+        app:layout_constraintTop_toBottomOf="@+id/TXTfechainicial" />
+
+    <RadioGroup
+        android:id="@+id/RGX_SelectorSalida"
+        android:layout_width="335dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="160dp"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TXTlapso" />
+        app:layout_constraintTop_toBottomOf="@+id/BTNfechas"
+        tools:ignore="TextSizeCheck">
+
+        <LinearLayout
+            android:id="@+id/ContenedorRB1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/RBX_Anios"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/RBX_Anios" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ContenedorRB2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/RBX_Meses"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:text="@string/RBX_Meses"
+                tools:layout_editor_absoluteX="97dp"
+                tools:layout_editor_absoluteY="535dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ContenedorRB3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/RBX_semanas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/RBX_Semanas"
+                tools:layout_editor_absoluteX="172dp"
+                tools:layout_editor_absoluteY="530dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ContenedorRB4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/RBX_dias"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/RBX_Dias" />
+
+        </LinearLayout>
+
+    </RadioGroup>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/FragmentoContenedor"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/RGX_SelectorSalida"
+        tools:layout="@layout/fragment_entre_fechas" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

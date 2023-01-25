@@ -12,4 +12,5 @@
     <color name="colorPrimaryDark">#FF018786</color>
     <color name="colorAccent">#FF5722</color>
     <color name="fondoSplash">#2196F3</color>
+    <color name="fondoResultado">#C7E2F8</color>
 </resources>

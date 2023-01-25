@@ -1,22 +1,23 @@
-package com.fedegiorno.fechas
+package com.fedegiorno.fechas.activities
 
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.fedegiorno.fechas.databinding.ActivityEntreFechaBinding
+import com.fedegiorno.fechas.Utils
+import com.fedegiorno.fechas.databinding.ActivityLapsoBinding
 
-class EntreFechaActivity : AppCompatActivity() {
-    private lateinit var entrefechabinding: ActivityEntreFechaBinding
+class LapsoActivity : AppCompatActivity() {
+    private lateinit var lapsobinding: ActivityLapsoBinding
     private lateinit var sFecha: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        entrefechabinding = ActivityEntreFechaBinding.inflate(layoutInflater)
-        setContentView(entrefechabinding.root)
-        entrefechabinding.TXTfechaOrigen.requestFocus()
+        lapsobinding = ActivityLapsoBinding.inflate(layoutInflater)
+        setContentView(lapsobinding.root)
+        lapsobinding.TXTfechaOrigen.requestFocus()
 
-        entrefechabinding.calendariolapso.setOnDateChangeListener { calendarView, year, month, dayOfMonth ->
+        lapsobinding.calendariolapso.setOnDateChangeListener { calendarView, year, month, dayOfMonth ->
 
             val dia: Int = dayOfMonth
             val mes = month + 1
@@ -25,18 +26,18 @@ class EntreFechaActivity : AppCompatActivity() {
 
             sFecha = Utils.cadenafecha(dia, mes, anio)
             //Log.d("KIRCHOFFF", sFecha.toString())
-            entrefechabinding.BTNCalcularlapso.isEnabled=true
+            lapsobinding.BTNCalcularlapso.isEnabled=true
 
-            if (entrefechabinding.TXTfechaOrigen.hasFocus()){
-                entrefechabinding.TXTfechaOrigen.setText(sFecha)
+            if (lapsobinding.TXTfechaOrigen.hasFocus()){
+                lapsobinding.TXTfechaOrigen.setText(sFecha)
             }
         }
 
-        entrefechabinding.BTNCalcularlapso.setOnClickListener {
+        lapsobinding.BTNCalcularlapso.setOnClickListener {
             if (Utils.verificarfecha(sFecha)) {
-                if (!entrefechabinding.TXTlapso.text.isNullOrEmpty()){
-                    Log.d("KIRCHOFFF", entrefechabinding.TXTlapso.text.toString())
-                    val nuevaFecha: String = CalcularFecha(entrefechabinding.TXTfechaOrigen.text.toString(), entrefechabinding.TXTlapso.text.toString())
+                if (!lapsobinding.TXTlapso.text.isNullOrEmpty()){
+                    Log.d("KIRCHOFFF", lapsobinding.TXTlapso.text.toString())
+                    val nuevaFecha: String = CalcularFecha(lapsobinding.TXTfechaOrigen.text.toString(), lapsobinding.TXTlapso.text.toString())
                     Log.d("KIRCHOFFF", nuevaFecha)
                 }
             }
@@ -50,9 +51,9 @@ class EntreFechaActivity : AppCompatActivity() {
         val diasdelanio: Int
         val diasrestantes: Int
         val restodias: Int
-        
+
         if (Utils.bisiesto(sAnio)) {
-           diasdelanio = 366
+            diasdelanio = 366
         } else {
             diasdelanio = 365
         }
@@ -110,3 +111,4 @@ class EntreFechaActivity : AppCompatActivity() {
         }
     }
 }
+
