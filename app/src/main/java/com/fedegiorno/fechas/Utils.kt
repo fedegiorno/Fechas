@@ -4,9 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
 class Utils : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        }
 
     companion object {
         val diasdelmes: List<Int> = listOf(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)

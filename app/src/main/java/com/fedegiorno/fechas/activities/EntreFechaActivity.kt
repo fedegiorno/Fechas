@@ -4,22 +4,21 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.widget.RadioGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
-import androidx.fragment.app.replace
 import com.fedegiorno.fechas.R
 import com.fedegiorno.fechas.Utils
 import com.fedegiorno.fechas.databinding.ActivityEntreFechaBinding
 import com.fedegiorno.fechas.fragments.EntreFechasFragment
 import com.fedegiorno.fechas.fragments.EntreFechasFragment.Companion.ARG_PARAM1
 
+
 class EntreFechaActivity : AppCompatActivity(), RadioGroup.OnCheckedChangeListener {
     private lateinit var entreFechaBinding: ActivityEntreFechaBinding
 
-    private lateinit var sFecha: String
+    private var sFecha: String? = ""
     private var opcion: Int = 1
 
     @SuppressLint("ResourceType", "SuspiciousIndentation")
@@ -32,14 +31,13 @@ class EntreFechaActivity : AppCompatActivity(), RadioGroup.OnCheckedChangeListen
 
         entreFechaBinding.TXTfechainicial.requestFocus()
 
-        entreFechaBinding.calendarioFechaInicio.setOnDateChangeListener { calendarView, year, month, dayOfMonth ->
+        entreFechaBinding.calendarioFecha.setOnDateChangeListener { calendarView, year, month, dayOfMonth ->
 
             var dia: Int = dayOfMonth
             var mes = month + 1
             var anio: Int = year
 
             sFecha = Utils.cadenafecha(dia, mes, anio)
-            Log.d("KIRCHOFFF", sFecha.toString())
             entreFechaBinding.BTNfechas.isEnabled = true
 
             if (entreFechaBinding.TXTfechainicial.hasFocus()){
@@ -49,126 +47,107 @@ class EntreFechaActivity : AppCompatActivity(), RadioGroup.OnCheckedChangeListen
             if (entreFechaBinding.TXTfechafinal.hasFocus()){
                 entreFechaBinding.TXTfechafinal.setText(sFecha.toString())
             }
+        }
 
-            entreFechaBinding.BTNfechas.setOnClickListener {
-                var totaldias: Int = 0
-                var totalanios: Int = 0
-                var totalmeses: Int = 0
-                var totalsemanas: Int = 0
-                var restomeses: Int = 0
-                var restosemanas: Int = 0
-                var restodiassemana: Int = 0
-                var restodias: Int = 0
+        entreFechaBinding.BTNfechas.setOnClickListener {
+            var totaldias: Int = 0
+            var totalanios: Int = 0
+            var totalmeses: Int = 0
+            var totalsemanas: Int = 0
+            var restomeses: Int = 0
+            var restosemanas: Int = 0
+            var restodiassemana: Int = 0
+            var restodias: Int = 0
 
-                when (entreFechaBinding.BTNfechas.text){
-                    "OK Fecha Inicial" -> {
-                        entreFechaBinding.BTNfechas.isEnabled = false
-                        //entreFechaBinding.TXTfechainicial.setText(sFecha)
-                        Log.d("KIRCHOFFF", "OPRIMISTE FECHA INICIAL")
-                        entreFechaBinding.BTNfechas.text = "OK Fecha Final"
-                        entreFechaBinding.TXTfechafinal.requestFocus()
-                    }
-                    "OK Fecha Final" -> {
-                        entreFechaBinding.BTNfechas.isEnabled = false
-                        //entreFechaBinding.TXTfechafinal.setText(sFecha)
-                        Log.d("KIRCHOFFF", "OPRIMISTE FECHA FINAL")
-                        entreFechaBinding.BTNfechas.text = "Calcular"
-                        entreFechaBinding.BTNfechas.isEnabled=true
-                        entreFechaBinding.BTNfechas.requestFocus()
-                    }
-                    "Calcular" -> {
-                        var miResultado: String? = null
-                        //Verificar fechas
-                        if ((Utils.verificarfecha(entreFechaBinding.TXTfechainicial.text.toString())) && Utils.verificarfecha(
-                                entreFechaBinding.TXTfechafinal.text.toString()
-                            )
-                        ){
-                            if (!fechasordenadas(entreFechaBinding.TXTfechainicial.text.toString(),entreFechaBinding.TXTfechafinal.text.toString())){
-                                sFecha = entreFechaBinding.TXTfechainicial.text.toString()
-                                entreFechaBinding.TXTfechainicial.setText(entreFechaBinding.TXTfechafinal.text.toString())
-                                entreFechaBinding.TXTfechafinal.setText(sFecha)
+            when (entreFechaBinding.BTNfechas.text){
+                "OK Fecha Inicial" -> {
+                    entreFechaBinding.BTNfechas.isEnabled = false
+                    entreFechaBinding.BTNfechas.text = "OK Fecha Final"
+                    entreFechaBinding.TXTfechafinal.requestFocus()
+                }
+                "OK Fecha Final" -> {
+                    entreFechaBinding.BTNfechas.isEnabled = false
+                    entreFechaBinding.BTNfechas.text = "Calcular"
+                    entreFechaBinding.BTNfechas.isEnabled=true
+                    entreFechaBinding.BTNfechas.requestFocus()
+                }
+                "Calcular" -> {
+                    var miResultado: String? = null
+                    //Verificar fechas
+                    if ((Utils.verificarfecha(entreFechaBinding.TXTfechainicial.text.toString())) && Utils.verificarfecha(
+                            entreFechaBinding.TXTfechafinal.text.toString()
+                        )
+                    ){
+                        if (!fechasordenadas(entreFechaBinding.TXTfechainicial.text.toString(),entreFechaBinding.TXTfechafinal.text.toString())){
+                            sFecha = entreFechaBinding.TXTfechainicial.text.toString()
+                            entreFechaBinding.TXTfechainicial.setText(entreFechaBinding.TXTfechafinal.text.toString())
+                            entreFechaBinding.TXTfechafinal.setText(sFecha)
+                        }
+                        totalanios = calcularanios(entreFechaBinding.TXTfechainicial.text.toString(),entreFechaBinding.TXTfechafinal.text.toString())
+                        restomeses = calcularrestomeses(entreFechaBinding.TXTfechainicial.text.toString(),entreFechaBinding.TXTfechafinal.text.toString(), totalanios)
+                        totaldias = calcularlapso(entreFechaBinding.TXTfechafinal.text.toString(), entreFechaBinding.TXTfechainicial.text.toString())
+                        restodias = calcularRestodias(entreFechaBinding.TXTfechainicial.text.toString(),entreFechaBinding.TXTfechafinal.text.toString())
+                        restosemanas = restodias / 7
+                        restodiassemana = restodias % 7
+                        when (opcion){
+                            1 -> {
+                                miResultado = totalanios.toString() + " anios\r\n" + restomeses + " meses\r\n" + restosemanas + " semanas\r\n" + restodiassemana + " dias"
                             }
-                            totalanios = calcularanios(entreFechaBinding.TXTfechainicial.text.toString(),entreFechaBinding.TXTfechafinal.text.toString())
-                            restomeses = calcularrestomeses(entreFechaBinding.TXTfechainicial.text.toString(),entreFechaBinding.TXTfechafinal.text.toString(), totalanios)
-                            totaldias = calcularlapso(entreFechaBinding.TXTfechafinal.text.toString(), entreFechaBinding.TXTfechainicial.text.toString())
-                            restosemanas = restodias / 7
-                            restodias = calcularRestodias(entreFechaBinding.TXTfechainicial.text.toString(),entreFechaBinding.TXTfechafinal.text.toString())
-                            restodiassemana = restodias % 7
-                            when (opcion){
-                                1 -> {
-                                    miResultado = totalanios.toString() + " anios\r\n" + restomeses + " meses\r\n" + restosemanas + " semanas\r\n" + restodias + " dias"
-
-                                    val bundle = bundleOf(ARG_PARAM1 to miResultado)
-                                    supportFragmentManager.commit {
-                                        setReorderingAllowed(true)
-                                        add<EntreFechasFragment>(R.id.FragmentoContenedor, args = bundle)
-                                    }
-
-                                }
-                                2 -> {
-                                    totalmeses = totalanios * 12 + restomeses
-                                    Toast.makeText(this, "Total de meses: " + totalmeses.toString(),
-                                        Toast.LENGTH_LONG).show()
-                                }
-                                3 -> {
-                                    totalsemanas = totaldias / 7
-                                    Toast.makeText(this, "Total de semanas: " + totalsemanas.toString(),
-                                        Toast.LENGTH_LONG).show()
-                                }
-                                4 -> {
-                                    Toast.makeText(this, "Total de dias: " + totaldias.toString(),
-                                        Toast.LENGTH_LONG).show()
-                                }
+                            2 -> {
+                                totalmeses = totalanios * 12 + restomeses
+                                miResultado = totalmeses.toString() + " meses\r\n"+ restosemanas + " semanas\r\n" + restodiassemana + " dias"
                             }
-
-                            //Log.d("KIRCHOFFF", calcularlapso(entreFechaBinding.TXTfechafinal.text.toString(), entreFechaBinding.TXTfechainicial.text.toString()).toString())
-                            //Log.d("KIRCHOFFF", totalanios.toString())
-                            Log.d("KIRCHOFFF", "Total de dias: " + totaldias.toString())
-                            Log.d("KIRCHOFFF", "Total de anios: " + totalanios.toString())
-                            Log.d("KIRCHOFFF", "Resto de meses: " + restomeses.toString())
-                            Log.d("KIRCHOFFF", "Resto de semanas: " + restosemanas.toString())
-                            Log.d("KIRCHOFFF", "Total de meses: " + totalmeses.toString())
-                            Log.d("KIRCHOFFF", "Total de semanas: " + totalsemanas.toString())
-                            Log.d("KIRCHOFFF", "Resto de dias: " + restodiassemana.toString())
+                            3 -> {
+                                totalsemanas = totaldias / 7
+                                miResultado = totalsemanas.toString() + " semanas\r\n" + restodiassemana + " dias"
+                            }
+                            4 -> {
+                                miResultado = totaldias.toString() + " dias"
+                            }
+                        }
+                        val bundle = bundleOf(ARG_PARAM1 to miResultado)
+                        supportFragmentManager.commit {
+                            setReorderingAllowed(true)
+                            add<EntreFechasFragment>(R.id.FragmentoContenedor, args = bundle)
                         }
                     }
                 }
             }
+        }
 
-            entreFechaBinding.TXTfechainicial.setOnClickListener {
-                entreFechaBinding.BTNfechas.text = "OK Fecha Inicial"
-                entreFechaBinding.BTNfechas.isEnabled = true
-            }
+        entreFechaBinding.BTNHoy.setOnClickListener {
+            var fechaHoy: Long = System.currentTimeMillis()
+            entreFechaBinding.calendarioFecha.setDate(fechaHoy,false,false)
+        }
 
-            entreFechaBinding.TXTfechafinal.setOnClickListener {
-                entreFechaBinding.BTNfechas.text = "OK Fecha Final"
-                entreFechaBinding.BTNfechas.isEnabled = true
-            }
+        entreFechaBinding.TXTfechainicial.setOnClickListener {
+            entreFechaBinding.BTNfechas.text = "OK Fecha Inicial"
+            entreFechaBinding.BTNfechas.isEnabled = true
+        }
 
-            entreFechaBinding.RGXSelectorSalida.setOnCheckedChangeListener { group, checkedId ->
-                when {
-                    checkedId == R.id.RBX_Anios -> {
-                        opcion = 1
-                        Log.d("KIRCHOFFF", "Resultado en anios")
-                    }
-                    checkedId == R.id.RBX_Meses -> {
-                        opcion = 2
-                        Log.d("KIRCHOFFF", "Resultado en meses")
-                    }
-                    checkedId == R.id.RBX_semanas -> {
-                        opcion = 3
-                        Log.d("KIRCHOFFF", "Resultado en semanas")
-                    }
-                    checkedId == R.id.RBX_dias -> {
-                        opcion = 4
-                        Log.d("KIRCHOFFF", "Resultado en dias")
-                    }
+        entreFechaBinding.TXTfechafinal.setOnClickListener {
+            entreFechaBinding.BTNfechas.text = "OK Fecha Final"
+            entreFechaBinding.BTNfechas.isEnabled = true
+        }
 
+        entreFechaBinding.RGXSelectorSalida.setOnCheckedChangeListener { group, checkedId ->
+            when {
+                checkedId == R.id.RBX_Anios -> {
+                    opcion = 1
+                    }
+                checkedId == R.id.RBX_Meses -> {
+                    opcion = 2
                 }
+                checkedId == R.id.RBX_semanas -> {
+                    opcion = 3
+                }
+                checkedId == R.id.RBX_dias -> {
+                    opcion = 4
+                }
+
             }
         }
     }
-
     private fun calcularRestodias(fIni: String, fFin: String): Int {
         var sDia1: String = fIni.subSequence(0,2).toString()
         var sDia2: String = fFin.subSequence(0,2).toString()
@@ -219,7 +198,7 @@ class EntreFechaActivity : AppCompatActivity(), RadioGroup.OnCheckedChangeListen
         if ((sMesIni.toInt() - sMesFin.toInt()) <= 0) {
             totalMeses = sMesFin.toInt() - sMesIni.toInt()
         }else{
-            totalMeses =  12+(sMesFin.toInt() - sMesIni.toInt())
+            totalMeses =  12 + (sMesFin.toInt() - sMesIni.toInt())
         }
 
         if ((sDiaFin.toInt() < sDiaIni.toInt())){
@@ -237,12 +216,12 @@ class EntreFechaActivity : AppCompatActivity(), RadioGroup.OnCheckedChangeListen
 
         var cantidadanios: Int = sAnioFin.toInt()-sAnioIni.toInt()
 
-        if (greFechaIni < greFechaFin){
+        if (greFechaIni <= greFechaFin){
             //cumplio anios
-            Log.d("KIRCHOFFF", (greFechaFin-greFechaIni).toString())
+            Log.i("KIRCHOFFF", (greFechaFin-greFechaIni).toString())
         } else {
             //no cumplio anios
-            Log.d("KIRCHOFFF", (greFechaFin-greFechaIni).toString())
+            Log.i("KIRCHOFFF", (greFechaFin-greFechaIni).toString())
             cantidadanios--
         }
         return cantidadanios
@@ -250,12 +229,8 @@ class EntreFechaActivity : AppCompatActivity(), RadioGroup.OnCheckedChangeListen
 
     private fun calcularlapso(fFinal: String, fInicial: String): Int {
         var sAnio: String = ""
-        //var sMes: String = ""
-        //var sDia: String = ""
         var anioIni: Int = 0
         var anioFin: Int = 0
-        //var Mes: Int = 0
-        //var Dia: Int = 0
         var gregIni: Int = 0
         var gregFin: Int = 0
 
@@ -263,14 +238,10 @@ class EntreFechaActivity : AppCompatActivity(), RadioGroup.OnCheckedChangeListen
         gregFin = Utils.gregoriano(fFinal)
 
         sAnio = fFinal.subSequence(6,10).toString()
-        //sMes = fFinal.subSequence(3,5).toString()
-        //sDia = fFinal.subSequence(0,2).toString()
 
         anioFin = sAnio.toInt()
 
         sAnio = fInicial.subSequence(6,10).toString()
-        //sMes = fInicial.subSequence(3,5).toString()
-        //sDia = fInicial.subSequence(0,2).toString()
 
         anioIni = sAnio.toInt()
 
@@ -314,3 +285,4 @@ class EntreFechaActivity : AppCompatActivity(), RadioGroup.OnCheckedChangeListen
     }
 
 }
+

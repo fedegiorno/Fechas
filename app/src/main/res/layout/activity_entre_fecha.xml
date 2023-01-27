@@ -9,159 +9,168 @@
     tools:context=".activities.EntreFechaActivity">
 
     <CalendarView
-        android:id="@+id/calendarioFechaInicio"
-        android:layout_width="350dp"
-        android:layout_height="270dp"
-        android:layout_marginTop="8dp"
+        android:id="@+id/calendarioFecha"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/guidelinecalendario"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.441"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/BTNfechas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:enabled="false"
         android:text="@string/BTNfechaIni"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineBTNOK"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TXTfechafinal" />
-
-    <TextView
-        android:id="@+id/ROT_fechainicial"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/rotuloFechaInicial"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/calendarioFechaInicio" />
+        app:layout_constraintTop_toTopOf="@+id/guidelinefechas" />
 
     <TextView
 
         android:id="@+id/ROT_fechafinal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="8dp"
         android:text="@string/rotuloFechaFinal"
-        app:layout_constraintBottom_toTopOf="@+id/BTNfechas"
+        app:layout_constraintBottom_toTopOf="@+id/guidelinefechas"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ROT_fechainicial"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.729" />
 
     <EditText
         android:id="@+id/TXTfechainicial"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="36dp"
         android:ems="10"
         android:hint="@string/TXTfechaHint"
         android:importantForAutofill="no"
-        android:inputType="date"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.662"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/ROT_fechainicial"
-        app:layout_constraintTop_toBottomOf="@+id/calendarioFechaInicio"
+        app:layout_constraintTop_toTopOf="@+id/guidelinecalendario"
         tools:ignore="DuplicateSpeakableTextCheck" />
 
     <EditText
         android:id="@+id/TXTfechafinal"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
         android:ems="10"
         android:hint="@string/TXTfechaHint"
         android:importantForAutofill="no"
-        android:inputType="date"
+        app:layout_constraintBottom_toTopOf="@+id/guidelinefechas"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.444"
+        app:layout_constraintHorizontal_bias="0.117"
         app:layout_constraintStart_toEndOf="@+id/ROT_fechafinal"
-        app:layout_constraintTop_toBottomOf="@+id/TXTfechainicial" />
+        app:layout_constraintTop_toBottomOf="@+id/TXTfechainicial"
+        app:layout_constraintVertical_bias="0.641" />
+
+    <TextView
+        android:id="@+id/ROT_fechainicial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="48dp"
+        android:text="@string/rotuloFechaInicial"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guidelinecalendario" />
 
     <RadioGroup
         android:id="@+id/RGX_SelectorSalida"
         android:layout_width="335dp"
         android:layout_height="55dp"
-        android:layout_marginBottom="160dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/guidelinefragmento"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/BTNfechas"
+        app:layout_constraintTop_toTopOf="@+id/guidelineBTNOK"
         tools:ignore="TextSizeCheck">
 
-        <LinearLayout
-            android:id="@+id/ContenedorRB1"
+        <RadioButton
+            android:id="@+id/RBX_Anios"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:text="@string/RBX_Anios" />
 
-            <RadioButton
-                android:id="@+id/RBX_Anios"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="@string/RBX_Anios" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ContenedorRB2"
+        <RadioButton
+            android:id="@+id/RBX_Meses"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="48dp"
+            android:text="@string/RBX_Meses"
+            tools:layout_editor_absoluteX="97dp"
+            tools:layout_editor_absoluteY="535dp" />
 
-            <RadioButton
-                android:id="@+id/RBX_Meses"
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:text="@string/RBX_Meses"
-                tools:layout_editor_absoluteX="97dp"
-                tools:layout_editor_absoluteY="535dp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ContenedorRB3"
+        <RadioButton
+            android:id="@+id/RBX_semanas"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:text="@string/RBX_Semanas"
+            tools:layout_editor_absoluteX="172dp"
+            tools:layout_editor_absoluteY="530dp" />
 
-            <RadioButton
-                android:id="@+id/RBX_semanas"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/RBX_Semanas"
-                tools:layout_editor_absoluteX="172dp"
-                tools:layout_editor_absoluteY="530dp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ContenedorRB4"
+        <RadioButton
+            android:id="@+id/RBX_dias"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <RadioButton
-                android:id="@+id/RBX_dias"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/RBX_Dias" />
-
-        </LinearLayout>
+            android:layout_height="wrap_content"
+            android:text="@string/RBX_Dias" />
 
     </RadioGroup>
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/FragmentoContenedor"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="410dp"
+        android:layout_height="171dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/RGX_SelectorSalida"
+        app:layout_constraintTop_toTopOf="@+id/guidelinefragmento"
         tools:layout="@layout/fragment_entre_fechas" />
+
+    <Button
+        android:id="@+id/BTN_hoy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:text="@string/BTN_hoy"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guidelinecalendario" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelinecalendario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.4"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelinefechas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.6" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineBTNOK"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.7" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelinefragmento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.8
+" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

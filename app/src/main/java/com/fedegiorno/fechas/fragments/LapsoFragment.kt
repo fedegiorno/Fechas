@@ -10,45 +10,45 @@ import android.widget.RadioGroup
 import android.widget.Toast
 import com.fedegiorno.fechas.R
 import com.fedegiorno.fechas.Utils
-import com.fedegiorno.fechas.databinding.FragmentEntreFechasBinding
+import com.fedegiorno.fechas.databinding.FragmentLapsoBinding
 
-class EntreFechasFragment : Fragment() {
-    private var _entreFechaBinding: FragmentEntreFechasBinding? = null
-    private val entreFechaBinding get() = _entreFechaBinding!!
+class LapsoFragment : Fragment() {
+    private var _lapsobinding: FragmentLapsoBinding? = null
+    private val lapsobinding get() = _lapsobinding!!
 
-    private var fechaResultado: String? = null
+    private var lapsoResultado: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            fechaResultado = it.getString(ARG_PARAM1)
-            Log.d("KIRCHOFFF", fechaResultado.orEmpty())
+            lapsoResultado = it.getString(ARG_PARAM2)
+            Log.d("KIRCHOFFF", lapsoResultado.orEmpty())
         }
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _entreFechaBinding = FragmentEntreFechasBinding.inflate(inflater, container, false)
-        entreFechaBinding.TXTResultadoFecha.setText(fechaResultado)
-        return entreFechaBinding.root
+        _lapsobinding = FragmentLapsoBinding.inflate(inflater, container, false)
+        lapsobinding.TXTResultadoLapso.setText(lapsoResultado)
 
+        return lapsobinding.root
     }
 
     companion object {
-        const val ARG_PARAM1 = "resultado_fecha"
+        const val ARG_PARAM2 = "resultado_lapso"
 
         @JvmStatic
-        fun newInstance(fechaResultado: String) =
-            EntreFechasFragment().apply {
+        fun newInstance(lapsoResultado: String) =
+            LapsoFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, fechaResultado)
+                    putString(ARG_PARAM2, lapsoResultado)
                 }
             }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _entreFechaBinding = null
+        _lapsobinding = null
     }
 }
